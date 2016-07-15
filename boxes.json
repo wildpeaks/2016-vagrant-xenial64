@@ -1,0 +1,50 @@
+[
+	{
+		"id": "render",
+		"title": "Render API",
+		"memory": 512,
+		"autostart": true,
+		"ports": [
+			{"host": 8002, "guest": 80}
+		],
+		"folders": [
+			{"host": "./boxes/render/www", "guest": "/var/www/render", "owner": "www-data", "group": "www-data"},
+			{"host": "./boxes/render/includes", "guest": "/var/www/includes", "owner": "www-data", "group": "www-data"},
+			{"host": "./boxes/render/thumbs", "guest": "/var/www/thumbs", "owner": "www-data", "group": "www-data"}
+		],
+		"provision": [
+			"nginx", "php", "phantomjs"
+		]
+	},
+	{
+		"id": "search",
+		"title": "Render API",
+		"memory": 512,
+		"autostart": true,
+		"ports": [
+			{"host": 8002, "guest": 80}
+		],
+		"folders": [
+			{"host": "./boxes/search/www", "guest": "/var/www/search", "owner": "www-data", "group": "www-data"},
+			{"host": "./boxes/search/includes", "guest": "/var/www/includes", "owner": "www-data", "group": "www-data"}
+		],
+		"provision": [
+			"motd", "nginx", "php"
+		]
+	},
+	{
+		"id": "website",
+		"title": "Website",
+		"memory": 512,
+		"autostart": true,
+		"ports": [
+			{"host": 80, "guest": 80}
+		],
+		"folders": [
+			{"host": "./boxes/website/www", "guest": "/var/www/website", "owner": "www-data", "group": "www-data"}
+		],
+		"provision": [
+			"nginx"
+		]
+	}
+]

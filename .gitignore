@@ -6,6 +6,8 @@
 !README.md
 !Vagrantfile
 !/provision
+!/boxes
+!/boxes.json
 
 WAS *
 Thumbs.db
