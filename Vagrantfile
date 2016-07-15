@@ -1,11 +1,13 @@
 
-# TODO one json per boxes subfolder instead, and the boxId is deduced from the folder name
-boxes = JSON.parse(IO.read("boxes.json", encoding: "utf-8"))
-
 
 Vagrant.configure(2) do |configs|
-	boxes.each do |box|
-		boxId = box["id"]
+	Dir.chdir('boxes')
+	boxIds = Dir.glob('*').select { |boxId| File.exist? "#{boxId}/box.json" }
+	Dir.chdir('..')
+
+	boxIds.each {
+		|boxId|
+		box = JSON.parse(IO.read("./boxes/#{boxId}/box.json", encoding: "utf-8"))
 
 		configs.vm.define boxId, autostart: box["autostart"] do |config|
 			config.vm.box = "ubuntu/xenial64"
@@ -29,7 +31,8 @@ Vagrant.configure(2) do |configs|
 				end
 
 				box["folders"].each do |folder|
-					config.vm.synced_folder folder["host"], folder["guest"], create: true, owner: folder["owner"], group: folder["group"]
+					hostPath = folder["host"]
+					config.vm.synced_folder "./boxes/#{boxId}/#{hostPath}", folder["guest"], create: true, owner: folder["owner"], group: folder["group"]
 				end
 
 				box["provision"].each do |provisionId|
@@ -41,5 +44,6 @@ Vagrant.configure(2) do |configs|
 				config.vm.provision "shell", name: "Fix the box", privileged: false, path: "provision/fix.sh"
 			end
 		end
-	end
+	}
+
 end
