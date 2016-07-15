@@ -1,0 +1,11 @@
+/*
+/*/
+
+!.gitignore
+!LICENSE
+!README.md
+!Vagrantfile
+!/provision
+
+WAS *
+Thumbs.db
