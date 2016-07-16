@@ -4,6 +4,7 @@
 !.gitignore
 !LICENSE
 !README.md
+!FULL Vagrantfile
 !Vagrantfile
 !/provision
 !/boxes
