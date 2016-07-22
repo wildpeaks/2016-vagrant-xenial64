@@ -49,7 +49,7 @@ Note that the "host" paths of shared folders are relative to the box folder, not
 
 If a file `provision.sh` exists in the box folder, it is runs after the synced folders have been setup.
 
-The `provision` folder is a set of **shell scripts** to install popular applications (such as Nginx or PHP 7) that `provision.sh` can optionally use.
+The `provision` folder (mounted as `/provision`) is a set of **shell scripts** to install popular applications (such as Nginx or PHP 7) that `provision.sh` can optionally use.
 
 
 ---
