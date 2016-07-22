@@ -1,0 +1,15 @@
+
+* text=auto
+
+.editorconfig  text
+.gitattributes text
+README         text
+LICENSE        text
+Vagrantfile    text
+motd           text
+*.md           text
+*.json         text
+*.php          text
+*.conf         text
+*.js           text
+*.html         text
