@@ -13,3 +13,4 @@ motd           text
 *.conf         text
 *.js           text
 *.html         text
+*.sh           text
