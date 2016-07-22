@@ -7,8 +7,5 @@
 	],
 	"folders": [
 		{"host": "www", "guest": "/var/www/box1", "owner": "ubuntu", "group": "www-data"}
-	],
-	"provision": [
-		"nginx"
 	]
 }
