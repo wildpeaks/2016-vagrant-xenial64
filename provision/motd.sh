@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f "/setup/motd" ]; then
+if [ -f "/box/motd" ]; then
 	echo "INFO: Installing MOTD"
-	sudo cp /setup/motd /etc/motd --force
+	sudo cp /box/motd /etc/motd --force
 fi
