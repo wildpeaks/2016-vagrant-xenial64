@@ -36,8 +36,8 @@ Vagrant.configure(2) do |configs|
 				end
 
 				## Provision script
+				config.vm.synced_folder "./provision/", "/provision", create: true
 				if File.exist?("./boxes/#{boxId}/provision.sh")
-					config.vm.synced_folder "./provision/", "/provision", create: true
 					config.vm.provision "shell", name: "Provision Script", privileged: false, path: "./boxes/#{boxId}/provision.sh"
 				end
 			else
