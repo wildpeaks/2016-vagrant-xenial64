@@ -3,8 +3,6 @@
 	"memory": 512,
 	"autostart": true,
 	"ports": [
-		{"host": 7473, "guest": 7473},
-		{"host": 7474, "guest": 7474}
 	],
 	"folders": [
 	]
