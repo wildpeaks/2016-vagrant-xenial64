@@ -1,0 +1,11 @@
+{
+	"title": "Web Server",
+	"memory": 512,
+	"autostart": true,
+	"ports": [
+		{"host": 8080, "guest": 80}
+	],
+	"folders": [
+		{"host": "www", "guest": "/var/www/website", "owner": "ubuntu", "group": "www-data"}
+	]
+}
