@@ -1,0 +1,15 @@
+
+[Unit]
+Description=Mosquitto broker with WebSockets support
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+Restart=always
+User=www-data
+Group=www-data
+Environment=PATH=/usr/bin:/usr/local/bin
+WorkingDirectory=/etc/mosquitto
+
+[Install]
+WantedBy=multi-user.target
