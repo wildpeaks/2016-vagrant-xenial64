@@ -11,10 +11,13 @@ First install the [vbguest plugin](https://rubygems.org/gems/vagrant-vbguest) (i
 
 	vagrant plugin install vagrant-vbguest
 
-Then initialize the boxes with:
+Then start the boxes with:
 
 	vagrant up
-	vagrant reload --provision
+
+Alternatively, you can also start only a specific box:
+
+	vagrant up web
 
 
 ---
