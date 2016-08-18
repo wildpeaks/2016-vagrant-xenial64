@@ -13,7 +13,7 @@ Vagrant.configure(2) do |configs|
 
 			## Ubuntu 16.04
 			config.vm.box = "ubuntu/xenial64"
-			config.vm.box_check_update = false
+			config.vm.box_check_update = true
 
 			## Forwarded ports
 			box["ports"].each do |port|
@@ -26,26 +26,22 @@ Vagrant.configure(2) do |configs|
 				vb.memory = box["memory"]
 			end
 
-			if File.exist?(".vagrant/machines/#{boxId}/virtualbox/action_provision")
+			## Shared folders
+			config.vm.synced_folder "./boxes/#{boxId}/", "/box", create: true, owner: 'root', group: 'root'
+			box["folders"].each do |folder|
+				hostPath = folder["host"]
+				config.vm.synced_folder "./boxes/#{boxId}/#{hostPath}", folder["guest"], create: true, owner: folder["owner"], group: folder["group"]
+			end
 
-				## Shared folders
-				config.vm.synced_folder "./boxes/#{boxId}/", "/box", create: true, owner: 'root', group: 'root'
-				box["folders"].each do |folder|
-					hostPath = folder["host"]
-					config.vm.synced_folder "./boxes/#{boxId}/#{hostPath}", folder["guest"], create: true, owner: folder["owner"], group: folder["group"]
-				end
+			## Fix hosts
+			config.vm.provision "shell", name: "Add the missing host", privileged: true, :inline => <<-SHELL
+				echo "127.0.0.1 ubuntu-xenial" >> /etc/hosts
+			SHELL
 
-				## Provision script
-				config.vm.synced_folder "./provision/", "/provision", create: true
-				if File.exist?("./boxes/#{boxId}/provision.sh")
-					config.vm.provision "shell", name: "Provision Script", privileged: false, path: "./boxes/#{boxId}/provision.sh"
-				end
-			else
-
-				## Fix hosts
-				config.vm.provision "shell", name: "Add the missing host", privileged: true, :inline => <<-SHELL
-					echo "127.0.0.1 ubuntu-xenial" >> /etc/hosts
-				SHELL
+			## Provision script
+			config.vm.synced_folder "./provision/", "/provision", create: true
+			if File.exist?("./boxes/#{boxId}/provision.sh")
+				config.vm.provision "shell", name: "Provision Script", privileged: false, path: "./boxes/#{boxId}/provision.sh"
 			end
 		end
 	}
